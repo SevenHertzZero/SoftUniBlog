@@ -19,6 +19,13 @@ module.exports = (app,config) =>{
     //For user validation we will use passport module.
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use((req, res, next) => {
+        if(req.user){
+            res.locals.user = req.user;
+        }
+
+        next();
+    });
     //This makes the content in the 'public' folder accessible for every user.
     app.use(express.static(path.join(config.rootFolder,'public')));
 };

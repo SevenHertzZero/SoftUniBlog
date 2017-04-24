@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const encryption = require('./../utilities/encryption');
 
 let userSchema = mongoose.Schema(
     {
@@ -12,7 +12,7 @@ let userSchema = mongoose.Schema(
 
 userSchema.method({
     authenticate: function (password) {
-        let inputPasswordHash = encription.hashPassword(password, this.salt);
+        let inputPasswordHash = encryption.hashPassword(password, this.salt);
         let isSamePasswordHash = inputPasswordHash === this.passwordHash;
         return isSamePasswordHash;
     }
