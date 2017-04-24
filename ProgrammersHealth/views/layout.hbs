@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Programmers Health</title>
+    <link rel="stylesheet" href="stylesheets/bootstrap.min.css"/>
+    <link rel="stylesheet" href="stylesheets/styles.css"/>
+    <script src="javascripts/jquery-3.1.1.min.js"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
+</head>
+<body>
+<header>
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="#" class="navbar-brand">#ProgrammersHealth</a>
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        {{#if user}}
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/user/details">Welcome({{user.email}})</a></li>
+                    <li><a href="/article/create">New Article</a></li>
+                    <li><a href="/user/logout">Logout</a></li>
+
+                </ul>
+             </div>
+        {{/if}}
+        {{#unless user}}
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/user/register">Register</a></li>
+                    <li><a href="/user/login">Login</a></li>
+                </ul>
+            </div>
+        {{/unless}}
+
+    </div>
+</div>
+</header>
+{{{body}}}
+</body>
+<footer>
+    <div class="container modal-footer">
+        <p style="color: white">&copy; 2017 - Made by Metodi Matov</p>
+    </div>
+</footer>
+</html>
