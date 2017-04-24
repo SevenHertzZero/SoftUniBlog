@@ -13,6 +13,9 @@
     "hbs": "~4.0.1",
     "mongoose": "^4.9.5",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.2"
+    "serve-favicon": "~2.3.2",
+    "passport": "latest",
+    "express-session": "latest",
+    "passport-local": "latest"
   }
 }
