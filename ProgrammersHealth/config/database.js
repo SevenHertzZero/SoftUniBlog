@@ -6,12 +6,13 @@ module.exports = (config) => {
 
     let database = mongoose.connection;
     database.once('open', (error) => {
-            if(error){
-                console.log(error);
-                return;
-            }
-            console.log('MongoDB ready');
+        if (error) {
+            console.log(error);
+            return;
+        }
+
+        console.log('MongoDB ready!')
     });
+
     require('./../models/User');
-    require('./../models/Article');
 };

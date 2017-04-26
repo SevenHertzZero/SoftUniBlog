@@ -8,7 +8,7 @@ module.exports = {
 
     registerPost:(req, res) => {
         let registerArgs = req.body;
-
+        console.log(registerArgs);
         User.findOne({email: registerArgs.email}).then(user => {
             let errorMsg = '';
             if (user) {
@@ -52,8 +52,10 @@ module.exports = {
 
     loginPost: (req, res) => {
         let loginArgs = req.body;
+
         User.findOne({email: loginArgs.email}).then(user => {
-            if (!user || !user.authenticate(loginArgs.password)) {
+            console.log(user);
+            if (!user ||!user.authenticate(loginArgs.password)) {
                 let errorMsg = 'Either username or password is invalid!';
                 loginArgs.error = errorMsg;
                 res.render('user/login', loginArgs);
