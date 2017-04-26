@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
+require('./../models/User');
+require('./../models/Article');
 
 module.exports = (config) => {
     mongoose.connect(config.connectionString);
