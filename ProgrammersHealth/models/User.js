@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const encryption = require('./../utilities/encryption');
 
-let userSchema = mongoose.Schema(
-    {
+let userSchema = mongoose.Schema({
         email: {type: String, required: true, unique: true},
         passwordHash: {type: String, required: true},
         fullName: {type: String, required: true},
-        articles: {type:[ObjectId], default: []},
+        articles: [{type: ObjectId , ref: 'Article'}],
+        roles: [{type: ObjectId , ref: 'Role'}],
         salt: {type: String, required: true}
     }
 );
