@@ -2,25 +2,20 @@
     <div class="row">
         {{#each articles}}
             <div class="col-md-6">
-                <article>
+                <div class="jumbotron">
                     <header>
                         <h2>{{this.title}}</h2>
                     </header>
-
-                    <p>{{this.content}}
-                    </p>
-
+                    <p>{{this.content}}</p>
                     <small class="author">
                         {{this.author.fullName}}
                     </small>
-
                     <footer>
-                        <div class="pull-right">
-                            <a class="btn btn-default btn-xs" href="/article/details/{{this.id}}">Read more &raquo;</a>
-                        </div>
+                        <p><a class="btn btn-primary btn-lg" href="/article/details/{{this.id}}">Learn more</a></p>
                     </footer>
-                </article>
+                </div>
             </div>
         {{/each}}
     </div>
 </div>
+

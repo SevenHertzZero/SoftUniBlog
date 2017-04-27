@@ -54,7 +54,6 @@ module.exports = {
         let loginArgs = req.body;
 
         User.findOne({email: loginArgs.email}).then(user => {
-            console.log(user);
             if (!user ||!user.authenticate(loginArgs.password)) {
                 let errorMsg = 'Either username or password is invalid!';
                 loginArgs.error = errorMsg;
@@ -64,7 +63,6 @@ module.exports = {
 
             req.logIn(user, (err) => {
                 if (err) {
-                    console.log(err);
                     res.redirect('/user/login', {error: err.message});
                     return;
                 }
