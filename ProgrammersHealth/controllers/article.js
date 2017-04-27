@@ -79,5 +79,30 @@ module.exports = {
                 });
         }
 
+    },
+    deleteGet: (req, res) =>{
+        let id = req.params.id;
+
+        Article.findById(id).then(article =>{
+            res.render('article/delete',article)
+        });
+    },
+    deletePost: (req, res) =>{
+        let id = req.params.id;
+
+        Article.findByIdAndRemove(id).then(article =>{
+           let index = req.user.articles.indexOf(article.id);
+
+            req.user.articles.splice(index, 1);
+
+            req.user.save(err => {
+                if(err){
+                    res.redirect('/', {error: err.message});
+                }else{
+                    res.redirect('/');
+                }
+            });
+        });
     }
+
 };
