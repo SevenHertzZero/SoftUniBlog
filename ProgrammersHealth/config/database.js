@@ -17,4 +17,7 @@ module.exports = (config) => {
     });
 
     require('./../models/User');
+    require('./../models/Role');
+    require('./../models/Article');
+
 };
