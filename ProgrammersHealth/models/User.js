@@ -20,8 +20,22 @@ userSchema.method({
         let isSamePasswordHash = inputPasswordHash === this.passwordHash;
         return isSamePasswordHash;
 
+    },
+    isAuthor: function (article) {
+        if(!article){
+            return false;
+        }
+
+        let id = article.author;
+
+        return this.id == id;
+
+    },
+    isInRole: function (roleName) {
+        
     }
 });
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

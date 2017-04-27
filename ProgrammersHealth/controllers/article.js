@@ -58,6 +58,10 @@ module.exports = {
         let id = req.params.id;
 
         Article.findById(id).then(article => {
+            if(req.user === undefined || !req.user.isAuthor(article)){
+                res.render('home/index', {error: 'You cannot operate with this article! '});
+                return;
+            }
             res.render('article/edit',article);
         });
     },
@@ -72,12 +76,11 @@ module.exports = {
                 error: errorMsg
             });
             return;
-        } else {
+        }
             Article.update({_id: id}, {$set: {title: articleParts.title, content: articleParts.content}})
                 .then(updateStatus => {
                     res.redirect('/article/details/' + id);
                 });
-        }
 
     },
     deleteGet: (req, res) =>{
