@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Role = require('mongoose').model('Role');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 const encryption = require('./../utilities/encryption');
 
@@ -24,3 +25,46 @@ userSchema.method({
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
+
+module.exports.initialize = () => {
+    let email = 'admin@mysite.com';
+
+    User.findOne({email: email}).then(admin =>{
+
+        if(admin) {
+            return;
+        }else {
+            Role.findOne({name: 'Admin'}).then(role =>{
+
+                if(!role){
+                    return;
+                }
+
+                let salt = encryption.generateSalt();
+                let passwordHash = encryption.hashPassword('admin123456', salt);
+
+                let adminUser = {
+                    email: email,
+                    fullName: 'Admin',
+                    roles: [role.id],
+                    articles: [],
+                    salt: salt,
+                    passwordHash: passwordHash
+                };
+
+                User.create(adminUser).then(user => {
+                    role.users.push(user.id);
+                    role.save(err =>{
+                        if(err){
+                            console.log(err.message);
+                        }else {
+                            console.log('Admin seeded successfully!');
+                        }
+                    });
+                });
+
+            });
+        }
+
+    });
+};

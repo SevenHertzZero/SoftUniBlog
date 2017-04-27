@@ -9,6 +9,7 @@ module.exports = {
 
     registerPost:(req, res) => {
         let registerArgs = req.body;
+
         User.findOne({email: registerArgs.email}).then(user => {
             let errorMsg = '';
             if (user) {
@@ -39,10 +40,10 @@ module.exports = {
 
                     User.create(userObject).then(user => {
                         role.users.push(user.id);
-                        role.save(err =>{
-                            if(err) {
+                        role.save(err => {
+                            if (err) {
                                 res.render('user/register', {error: err.message});
-                            }else {
+                            } else {
                                 req.logIn(user, (err) => {
                                     if (err) {
                                         registerArgs.error = err.message;
@@ -57,7 +58,7 @@ module.exports = {
                     });
                 });
             }
-        })
+        });
     },
 
     loginGet: (req, res) => {
